@@ -1,0 +1,31 @@
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom box-shadow">
+  <a class="navbar-brand text-white mr-md-auto" routerLink="/home" routerLinkActive="active">Hulk Store</a>
+
+
+  <nav class="my-2 my-md-0 mr-md-3">
+    <a class="p-2 text-white" routerLink="/ingreso" *ngIf="rol ===  'ROL VENDEDOR'">Ingresar Mercadería</a>
+    <a class="p-2 text-white" routerLink="/stock" *ngIf="rol ===  'ROL ADMINISTRADOR'">Stock Productos</a>
+    <a class="p-2 text-white" routerLink="/producto" *ngIf="rol ===  'ROL ADMINISTRADOR'">Gestión Productos</a>
+    <a class="p-2 text-white" routerLink="/mis-compras" *ngIf="rol ===  'ROL EMPLEADO'">Mis Compras</a>
+  </nav>
+
+  <!--
+<nav class="my-2 my-md-0 mr-md-3">
+  <a class="p-2 text-white" routerLink="/ingreso" routerLinkActive="active" >Ingresar Mercadería</a>
+  <a class="p-2 text-white" routerLink="/stock" routerLinkActive="active" >Stock Productos</a>
+  <a class="p-2 text-white" routerLink="/producto" routerLinkActive="active" >Gestión Productos</a>
+  <a class="p-2 text-white" routerLink="/mis-compras" routerLinkActive="active" >Mis Compras</a>
+</nav>
+-->
+
+  <nav>
+    <a class="btn btn-outline-primary" routerLink="/home" routerLinkActive="active" *ngIf="rol"
+      style="text-decoration: none; color: rgb(138, 252, 138) ;">{{usuario}}</a>
+
+    <a class="btn btn-outline-primary" routerLink="/singin" routerLinkActive="active" *ngIf="!rol">Sign in</a> |
+    <a class="btn btn-outline-primary" routerLink="/singup" routerLinkActive="active" *ngIf="!rol">Sign up</a>
+
+    <a class="btn btn-outline-primary" routerLink="/home" routerLinkActive="active" (click)="onLogout()"
+      *ngIf="rol">Sign out</a>
+  </nav>
+</div>

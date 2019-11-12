@@ -1,0 +1,125 @@
+<div class="container">
+
+  <h3 class="text-center">Artículos</h3>
+  <div class="text-right" *ngIf="productoSeleccionado">
+    <a class="nav-link" (click)="clickVerCarritoCompras()" style="color: red; cursor: pointer;">Mis Items
+      <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+      <span class="badge badge-light">{{itemsCarritoCompra.length}}</span>
+    </a>
+  </div>
+
+  <div *ngIf="!verCarritoCompras; else mytemplate">
+    <p class="lead text-center">Tienda Online de productos para sus empleados</p>
+    <hr>
+    <div class="card-deck mb-3 text-center">
+
+      <div class="row">
+        <div class="col-sm-4 mb-3" *ngFor="let producto of productos">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="my-0 font-weight-normal">{{producto.nombre}}</h4>
+            </div>
+            <div class="card-body">
+              <img class="card-img-top mx-5" src="{{producto.url}}" class="img-thumbnail rounded" style="height: 125px;">
+              <h4 class="card-title pricing-card-title"><small class="text-muted">Precio: </small>
+                {{producto.precio | currency : 'USD ':true:'1.2'}}</h4>
+              <h4 class="card-title pricing-card-title"><small class="text-muted">Cantidad: </small>
+                {{producto.cantidad}}
+              </h4>
+
+              <ul class="list-unstyled mt-3 mb-4">
+                <li style="color: chocolate; font-size: 1.2em;">{{producto.categoria}}</li>
+                <li>{{producto.descripcion}}</li>
+              </ul>
+              <button type="button" class="btn btn-lg btn-block btn-outline-primary"
+                (click)="seleccionarArticulo(producto)" data-toggle="modal" data-target="#exampleModal"
+                *ngIf="rol ===  'ROL EMPLEADO'">Agregar
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <br>
+      </div>
+
+
+
+
+    </div>
+  </div>
+</div>
+
+<ng-template #mytemplate>
+  <!--<h4 class="card-title" *ngIf="productoSeleccionado">
+    <a [routerLink]="['/home']" class="btn btn-light btn-xs">&laquo; volver</a>
+  </h4> -->
+  <p class="lead">Tienda Online artículos ingresados por el empleados</p>
+  <hr>
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Preview</th>
+        <th scope="col">Categoría</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Total</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of itemsCarritoCompra">
+        <td>
+          <img *ngIf="producto?.url" src="{{producto.url}}" class="img-thumbnail rounded" style="width: 64px; ">
+
+          <img *ngIf="!producto?.url" src="http://localhost:8080/images/no_image.png" alt="sin foto"
+            class="img-thumbnail rounded" style="width: 64px;"></td>
+        <th>{{producto.categoria}}</th>
+        <td>{{producto.nombre}}</td>
+        <td>{{producto.descripcion}}</td>
+        <td class="text-right">{{producto.precio}}</td>
+        <td class="text-right">1</td>
+        <td class="text-right">{{producto.precio * 1}}</td>
+        <td class="text-center"><button type="button" class="btn btn-danger btn-sm"
+            (click)="removerProducto(producto.id)">X</button></td>
+
+      </tr>
+    </tbody>
+  </table>
+  <hr />
+  <button type="button" class="btn mce-btn-large btn-outline-primary" (click)="realizarCompra()">Pagar
+    <i class="fa fa-credit-card" aria-hidden="true"></i>
+  </button>
+</ng-template>
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar artículo al carro de compras</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="productoSeleccionado">
+        <h5 class="card-title text-center text-info">{{productoSeleccionado.nombre}}</h5>
+        <h6 class="d-flex justify-content-between">
+          Precio
+          <em>{{productoSeleccionado.precio | currency : 'USD ':true:'1.2'}}</em>
+        </h6>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addArticulo()">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>

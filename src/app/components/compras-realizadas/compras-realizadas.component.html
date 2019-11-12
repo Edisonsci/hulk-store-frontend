@@ -1,0 +1,32 @@
+<div class="container">
+
+  <div style="margin-top: 30px">
+    <h3 class="text-center">Mis Compras - Hulk Store</h3>
+    <hr/>
+
+
+    <div class="col-md-12">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Nro. Documento</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Subtotal</th>
+            <th scope="col">Iva</th>
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let compra of misCompras">
+            <th>{{compra.nroDocumento}}</th>
+            <td>{{compra.fecha}}</td>
+            <td>{{compra.subtotal | currency : 'USD ':true:'1.2'}}</td>
+            <td>{{compra.iva | currency : 'USD ':true:'1.2'}}</td>
+            <td>{{compra.total | currency : 'USD ':true:'1.2'}}</td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

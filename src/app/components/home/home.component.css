@@ -1,0 +1,13 @@
+.imgDelete {
+  float:right;
+  cursor:pointer;
+  width:24px;
+}
+
+.card-img-top {
+  width: 70%;
+}
+
+.card-body {
+  padding: 0.75rem;
+}

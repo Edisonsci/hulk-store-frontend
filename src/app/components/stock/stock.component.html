@@ -1,0 +1,48 @@
+<div class="container">
+
+  <div style="margin-top: 30px">
+    <h3 class="text-center">Stock de Productos - Hulk Store</h3>
+    <hr />
+
+
+    <div class="col-md-12">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Preview</th>
+            <th scope="col">Categoría</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Cantidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of productos">
+            <td>
+              <img  *ngIf="producto?.url"
+                src="{{producto.url}}"
+                class="img-thumbnail rounded" style="width: 64px; ">
+
+              <img *ngIf="!producto?.url" src="http://localhost:8080/images/no_image.png" alt="sin foto"
+                class="img-thumbnail rounded" style="width: 64px;"></td>
+            <td>{{producto.categoria}}</td>
+            <td>{{producto.nombre}}</td>
+            <td>{{producto.descripcion}}</td>
+            <td class="text-right">{{producto.precio | currency : 'USD ':true:'1.2'}}</td>
+            <td class="text-right">{{producto.cantidad}}</td>
+
+          </tr>
+
+        </tbody>
+      </table>
+      <div class="alert alert-info my-6 " style="height: 50px;" *ngIf="granTotal > 0">
+        <h5 class="float-right col-sm-2"   *ngIf="granTotal > 0">Gran Total:
+          <span class="badge badge-secondary " >{{granTotal}}</span>
+        </h5>
+      </div>
+
+
+    </div>
+  </div>
+</div>
